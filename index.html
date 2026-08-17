@@ -151,26 +151,14 @@ a{color:var(--amber);text-decoration:none}
 .route{display:none;padding:clamp(30px,5vw,52px) 0 130px}
 
 /* portrait */
-.about-head{display:grid;grid-template-columns:196px minmax(0,1fr);gap:clamp(22px,4vw,44px);align-items:center;margin-bottom:34px}
-.portrait{margin:0;position:relative;border:1px solid var(--line);border-radius:2px;overflow:hidden;background:var(--surface)}
-.portrait img{
-  width:100%;display:block;aspect-ratio:4/5;object-fit:cover;
-  filter:grayscale(1) contrast(1.06) brightness(.94);
-  transition:filter .6s ease,transform .6s cubic-bezier(.2,.7,.3,1);
+.about-head{display:grid;grid-template-columns:230px minmax(0,1fr);gap:clamp(24px,4vw,46px);align-items:center;margin-bottom:34px}
+.portrait{
+  margin:0;border:1px solid var(--line);border-radius:2px;overflow:hidden;
+  background:var(--surface);box-shadow:var(--sh);
+  transition:transform .5s cubic-bezier(.2,.7,.3,1),border-color .5s ease;
 }
-.portrait::after{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(180deg,transparent 40%,rgba(11,14,20,.34) 100%);
-  mix-blend-mode:multiply;opacity:.85;transition:opacity .6s ease;
-}
-html[data-theme="light"] .portrait::after{background:linear-gradient(180deg,transparent 46%,rgba(18,22,32,.16) 100%)}
-.portrait:hover img{filter:grayscale(0) contrast(1.02) brightness(1);transform:scale(1.02)}
-.portrait:hover::after{opacity:.35}
-.portrait figcaption{
-  position:absolute;left:0;right:0;bottom:0;z-index:2;padding:9px 11px;
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--ink);opacity:.8;
-}
+.portrait img{width:100%;height:auto;display:block}
+.portrait:hover{transform:translateY(-3px);border-color:var(--line-2)}
 .route.live{display:block}
 .route.enter{animation:rIn .5s cubic-bezier(.2,.72,.28,1) both}
 .route.exit{animation:rOut .22s ease both}
@@ -402,8 +390,8 @@ details[open] summary .pm{transform:rotate(45deg)}
   .top-in{position:relative}
   #burger{display:inline-flex}
   .grid-2{grid-template-columns:1fr}
-  .about-head{grid-template-columns:1fr;gap:20px}
-  .portrait{max-width:180px}
+  .about-head{grid-template-columns:1fr;gap:22px;justify-items:start}
+  .portrait{max-width:200px}
   .stats{grid-template-columns:repeat(2,1fr)}
   .award{grid-template-columns:1fr;gap:12px}
   .award .badge{max-width:110px}
@@ -505,8 +493,7 @@ details[open] summary .pm{transform:rotate(45deg)}
   <div class="fig rv"><b>Page 02</b><span>About</span><hr></div>
   <div class="about-head rv">
     <figure class="portrait">
-      <img src="pooja.jpg" alt="Pooja Viswanathan" width="760" height="950" loading="lazy">
-      <figcaption>Bangalore</figcaption>
+      <img src="pooja.jpg" alt="Pooja Viswanathan" width="780" height="1040" loading="lazy">
     </figure>
     <h2 class="display" style="margin:0">Two questions have held my attention since first year. How the body encodes information, and how software earns the right to be trusted with it.</h2>
   </div>
