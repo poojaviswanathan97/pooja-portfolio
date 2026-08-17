@@ -551,10 +551,8 @@ details[open] summary .pm{transform:rotate(45deg)}
       <p class="small" style="margin-bottom:22px">Open to software engineering, machine learning and health tech roles</p>
       <div class="btns" style="margin-top:0">
         <button class="btn" id="copy-mail">Copy email</button>
-        <!-- TODO: replace # with your LinkedIn URL -->
-        <a class="btn" href="#" target="_blank" rel="noopener">LinkedIn</a>
-        <!-- TODO: replace # with your GitHub URL -->
-        <a class="btn" href="#" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/pooja-viswanathan-6540892a6/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://github.com/poojaviswanathan97" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
 
@@ -1005,6 +1003,8 @@ var ACTIONS = ROUTES.map(function(r){
   [
     { label:"Copy my email", hint:"action", go: copyEmail },
     { label:"Open the live triage demo", hint:"link", go: function(){ open("https://ed-triage-snowy.vercel.app","_blank","noopener"); } },
+    { label:"GitHub", hint:"link", go: function(){ open("https://github.com/poojaviswanathan97","_blank","noopener"); } },
+    { label:"LinkedIn", hint:"link", go: function(){ open("https://www.linkedin.com/in/pooja-viswanathan-6540892a6/","_blank","noopener"); } },
     { label:"Switch theme", hint:"action", go: function(){ setTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark"); } }
   ]
 );
