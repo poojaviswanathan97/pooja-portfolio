@@ -149,7 +149,39 @@ a{color:var(--amber);text-decoration:none}
 
 /* ---------- routes ---------- */
 .route{display:none;padding:clamp(30px,5vw,52px) 0 130px}
+
+/* portrait */
+.about-head{display:grid;grid-template-columns:196px minmax(0,1fr);gap:clamp(22px,4vw,44px);align-items:center;margin-bottom:34px}
+.portrait{margin:0;position:relative;border:1px solid var(--line);border-radius:2px;overflow:hidden;background:var(--surface)}
+.portrait img{
+  width:100%;display:block;aspect-ratio:4/5;object-fit:cover;
+  filter:grayscale(1) contrast(1.06) brightness(.94);
+  transition:filter .6s ease,transform .6s cubic-bezier(.2,.7,.3,1);
+}
+.portrait::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,transparent 40%,rgba(11,14,20,.34) 100%);
+  mix-blend-mode:multiply;opacity:.85;transition:opacity .6s ease;
+}
+html[data-theme="light"] .portrait::after{background:linear-gradient(180deg,transparent 46%,rgba(18,22,32,.16) 100%)}
+.portrait:hover img{filter:grayscale(0) contrast(1.02) brightness(1);transform:scale(1.02)}
+.portrait:hover::after{opacity:.35}
+.portrait figcaption{
+  position:absolute;left:0;right:0;bottom:0;z-index:2;padding:9px 11px;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink);opacity:.8;
+}
 .route.live{display:block}
+.route.enter{animation:rIn .5s cubic-bezier(.2,.72,.28,1) both}
+.route.exit{animation:rOut .22s ease both}
+@keyframes rIn{from{opacity:0;transform:translateY(16px) scale(.995);filter:blur(3px)}to{opacity:1;transform:none;filter:none}}
+@keyframes rOut{from{opacity:1;transform:none}to{opacity:0;transform:translateY(-10px)}}
+#sweep{
+  position:fixed;top:0;left:0;height:2px;width:0;z-index:130;background:var(--amber);
+  opacity:0;pointer-events:none;
+}
+#sweep.run{animation:sw .62s cubic-bezier(.5,0,.2,1) both}
+@keyframes sw{0%{width:0;opacity:1}55%{width:100%;opacity:1}100%{width:100%;opacity:0}}
 .rv{opacity:0;transform:translateY(14px)}
 .rv.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.3,1)}
 
@@ -370,6 +402,8 @@ details[open] summary .pm{transform:rotate(45deg)}
   .top-in{position:relative}
   #burger{display:inline-flex}
   .grid-2{grid-template-columns:1fr}
+  .about-head{grid-template-columns:1fr;gap:20px}
+  .portrait{max-width:180px}
   .stats{grid-template-columns:repeat(2,1fr)}
   .award{grid-template-columns:1fr;gap:12px}
   .award .badge{max-width:110px}
@@ -398,12 +432,13 @@ details[open] summary .pm{transform:rotate(45deg)}
 <canvas id="field" aria-hidden="true"></canvas>
 <div id="grain" aria-hidden="true"></div>
 <div id="prog"></div>
+<div id="sweep"></div>
 <div id="ret" aria-hidden="true"><i></i></div>
 
 <!-- ============ HEADER ============ -->
 <div class="shell top">
   <div class="top-in">
-    <a class="logo" href="#/home"><b>Pooja Viswanathan</b><s>Bench 01</s></a>
+    <a class="logo" href="#/home"><b>Pooja Viswanathan</b></a>
     <nav id="nav">
       <a href="#/home">Home</a>
       <a href="#/about">About</a>
@@ -428,7 +463,6 @@ details[open] summary .pm{transform:rotate(45deg)}
 <!-- ============ HOME ============ -->
 <section class="route" data-route="home" id="r-home">
   <div class="hero">
-    <span class="kicker rv"><span class="pulse"></span> Open for the 2027 batch</span>
     <h1 class="rv">Pooja<br>Viswanathan</h1>
     <p class="hero-sub rv">I build systems that read evidence off the body and off the page. Biomedical signals, forensic document analysis, and clinical software that has to be trusted the first time.</p>
     <div class="hero-meta rv">
@@ -447,7 +481,7 @@ details[open] summary .pm{transform:rotate(45deg)}
 
   <div class="marquee rv"><span id="mq"></span></div>
 
-  <div class="fig rv"><b>Fig. 01</b><span>Selected work</span><hr></div>
+  <div class="fig rv"><b>Page 01</b><span>Selected work</span><hr></div>
   <div class="grid-3 rv" id="featured"></div>
 
   <div style="height:26px"></div>
@@ -468,8 +502,14 @@ details[open] summary .pm{transform:rotate(45deg)}
 
 <!-- ============ ABOUT ============ -->
 <section class="route" data-route="about" id="r-about">
-  <div class="fig rv"><b>Fig. 02</b><span>About</span><hr></div>
-  <h2 class="display rv">Two questions have held my attention since first year. How the body encodes information, and how software earns the right to be trusted with it.</h2>
+  <div class="fig rv"><b>Page 02</b><span>About</span><hr></div>
+  <div class="about-head rv">
+    <figure class="portrait">
+      <img src="pooja.jpg" alt="Pooja Viswanathan" width="760" height="950" loading="lazy">
+      <figcaption>Bangalore</figcaption>
+    </figure>
+    <h2 class="display" style="margin:0">Two questions have held my attention since first year. How the body encodes information, and how software earns the right to be trusted with it.</h2>
+  </div>
 
   <div class="grid-2 rv" style="margin-top:34px">
     <div class="card">
@@ -498,7 +538,7 @@ details[open] summary .pm{transform:rotate(45deg)}
 
 <!-- ============ WORK ============ -->
 <section class="route" data-route="work" id="r-work">
-  <div class="fig rv"><b>Fig. 03</b><span>Selected work</span><hr></div>
+  <div class="fig rv"><b>Page 03</b><span>Selected work</span><hr></div>
   <h2 class="display rv">Things I have built</h2>
   <p class="rv" style="margin-bottom:32px">Open a case file for the aim, the method and what actually came out of it.</p>
   <div class="stack" id="work-list"></div>
@@ -506,14 +546,14 @@ details[open] summary .pm{transform:rotate(45deg)}
 
 <!-- ============ PATH ============ -->
 <section class="route" data-route="path" id="r-path">
-  <div class="fig rv"><b>Fig. 04</b><span>Path</span><hr></div>
+  <div class="fig rv"><b>Page 04</b><span>Path</span><hr></div>
   <h2 class="display rv">The route so far</h2>
   <div class="card rv" style="margin-top:28px"><div class="tl" id="timeline"></div></div>
 </section>
 
 <!-- ============ TOOLKIT ============ -->
 <section class="route" data-route="toolkit" id="r-toolkit">
-  <div class="fig rv"><b>Fig. 05</b><span>Toolkit</span><hr></div>
+  <div class="fig rv"><b>Page 05</b><span>Toolkit</span><hr></div>
   <h2 class="display rv">The bench, laid out</h2>
   <p class="rv">Hover or tap any instrument. The cross reference shows where I have actually used it.</p>
   <div class="trace rv" id="trace"><b>Cross reference</b> <span id="trace-out">Awaiting selection</span></div>
@@ -522,7 +562,7 @@ details[open] summary .pm{transform:rotate(45deg)}
 
 <!-- ============ HONOURS ============ -->
 <section class="route" data-route="honours" id="r-honours">
-  <div class="fig rv"><b>Fig. 06</b><span>Honours</span><hr></div>
+  <div class="fig rv"><b>Page 06</b><span>Honours</span><hr></div>
   <h2 class="display rv">Recognition</h2>
   <div class="stack rv" style="margin-top:28px" id="awards"></div>
   <div class="card rv" style="margin-top:16px">
@@ -538,7 +578,7 @@ details[open] summary .pm{transform:rotate(45deg)}
 
 <!-- ============ CONTACT ============ -->
 <section class="route" data-route="contact" id="r-contact">
-  <div class="fig rv"><b>Fig. 07</b><span>Contact</span><hr></div>
+  <div class="fig rv"><b>Page 07</b><span>Contact</span><hr></div>
   <h2 class="display rv">If any of this overlaps with what you are building, write to me.</h2>
 
   <div class="grid-2 rv" style="margin-top:30px">
@@ -717,7 +757,7 @@ $("#work-list").innerHTML = WORK.map(function(w){
     '<span class="idx">' + w.n + " &nbsp;" + w.tag + " &nbsp;&#183;&nbsp; " + w.meta + "</span>" +
     "<h3>" + w.title + "</h3><p>" + w.blurb + "</p>" + role +
     '<ul class="tags">' + w.tags.map(function(t){ return "<li>" + t + "</li>"; }).join("") + "</ul>" +
-    "<details><summary><span class='pm'>+</span> Case file</summary><dl class='case'>" +
+    "<details><summary><span class='pm'>+</span> Description</summary><dl class='case'>" +
       "<div><dt>Aim</dt><dd>" + w.aim + "</dd></div>" +
       "<div><dt>Method</dt><dd>" + w.method + "</dd></div>" +
       "<div><dt>Outcome</dt><dd>" + w.out + "</dd></div>" +
@@ -757,29 +797,54 @@ $("#kit").addEventListener("click", function(e){
 /* ========== ROUTER ========== */
 var ROUTES = ["home","about","work","path","toolkit","honours","contact"];
 var navLinks = [].slice.call(document.querySelectorAll("#nav a"));
+var currentRoute = null;
 
-function show(name){
-  if(ROUTES.indexOf(name) < 0) name = "home";
-  [].forEach.call(document.querySelectorAll(".route"), function(s){
-    s.classList.toggle("live", s.getAttribute("data-route") === name);
-  });
+function mount(live, name){
   navLinks.forEach(function(a){ a.classList.toggle("on", a.getAttribute("href") === "#/" + name); });
-  var live = document.querySelector('.route[data-route="' + name + '"]');
+  live.classList.add("live");
   var rvs = [].slice.call(live.querySelectorAll(".rv"));
-  rvs.forEach(function(n){ n.classList.remove("in"); });
+  rvs.forEach(function(n){ n.classList.remove("in"); n.style.transitionDelay = "0ms"; });
+  window.scrollTo({ top: 0, behavior: "auto" });
   if(reduce){
     rvs.forEach(function(n){ n.classList.add("in"); });
   }else{
+    live.classList.remove("exit");
+    live.classList.add("enter");
+    setTimeout(function(){ live.classList.remove("enter"); }, 520);
     rvs.forEach(function(n, i){
-      n.style.transitionDelay = Math.min(i * 70, 480) + "ms";
-      setTimeout(function(){ n.classList.add("in"); }, 20);
+      n.style.transitionDelay = Math.min(i * 60, 420) + "ms";
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){ n.classList.add("in"); }); });
     });
   }
-  window.scrollTo({ top: 0, behavior: "auto" });
   document.title = "Pooja Viswanathan" + (name === "home" ? ", Computational Biology and Clinical Systems" : ", " + name.charAt(0).toUpperCase() + name.slice(1));
   if(name === "home") runCounts();
   $("#nav").classList.remove("show");
   $("#burger").setAttribute("aria-expanded","false");
+}
+
+function show(name){
+  if(ROUTES.indexOf(name) < 0) name = "home";
+  if(name === currentRoute) return;
+  var live = document.querySelector('.route[data-route="' + name + '"]');
+  var prev = currentRoute ? document.querySelector('.route[data-route="' + currentRoute + '"]') : null;
+  currentRoute = name;
+
+  if(!prev || reduce){
+    if(prev) prev.classList.remove("live","enter","exit");
+    mount(live, name);
+    return;
+  }
+  var sweep = $("#sweep");
+  sweep.classList.remove("run");
+  void sweep.offsetWidth;
+  sweep.classList.add("run");
+
+  prev.classList.remove("enter");
+  prev.classList.add("exit");
+  setTimeout(function(){
+    prev.classList.remove("live","exit");
+    mount(live, name);
+  }, 210);
 }
 function fromHash(){ return (location.hash || "#/home").replace("#/","").split("?")[0]; }
 addEventListener("hashchange", function(){ show(fromHash()); });
